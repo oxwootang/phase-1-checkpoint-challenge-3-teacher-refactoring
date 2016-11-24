@@ -22,19 +22,11 @@ module TeacherMod
 
   def set_performance_rating(rating)
     response = ""
-    if self.instance_of?(ApprenticeTeacher)
-      if rating > 80
-        response = "Yay, I'm a great employee!"
-        receive_raise(@target_raise)
-      end
-    else
-      if rating > 90
-        response = "Yay, I'm a great employee!"
-        receive_raise(@target_raise)
-      end
+    if (self.instance_of?(ApprenticeTeacher) && rating > 80) || (self.instance_of?(SeniorTeacher) && rating > 90)
+      response = "Yay, I'm a great employee!"
+      receive_raise(@target_raise)
     end
     return response if response != ""
-    response += "Oh, well -- thanks to this actionable, specific, and kind feedback, I'll do better next time."
-    response
+    response = "Oh, well -- thanks to this actionable, specific, and kind feedback, I'll do better next time."
   end
 end
